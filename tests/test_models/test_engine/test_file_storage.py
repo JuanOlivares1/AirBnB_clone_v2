@@ -115,3 +115,7 @@ class test_fileStorage(unittest.TestCase):
         from models.engine.file_storage import FileStorage
         print(type(storage))
         self.assertEqual(type(storage), FileStorage)
+
+        def test_delete(self):
+            """ Delete """
+            self.assertNotEqual(True, False)
