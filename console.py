@@ -30,8 +30,6 @@ class HBNBCommand(cmd.Cmd):
              'latitude': float, 'longitude': float
             }
 
-    pline = []
-
     def preloop(self):
         """Prints if isatty is false"""
         if not sys.__stdin__.isatty():
@@ -47,11 +45,7 @@ class HBNBCommand(cmd.Cmd):
 
         # scan for general formating - i.e '.', '(', ')'
         if not ('.' in line and '(' in line and ')' in line):
-            # store parsed line.
-            HBNBCommand.pline = line.split()
             return line
-
-        HBNBCommand.pline = []
         try:  # parse line left to right
             pline = line[:]  # parsed line
 
@@ -120,21 +114,21 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
-        pline = HBNBCommand.pline
+        pline = args.split()
         length = len(pline)
-        if length == 1:  # command: create
+        if length == 0:  # command: create
             print("** class name missing **")
             return
         # command: create sdfsdfs BaseModel
         # pline: ['create', 'sdfsdfs', 'BaseModel']
-        elif pline[1] not in HBNBCommand.classes:
+        elif pline[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[pline[1]]()
+        new_instance = HBNBCommand.classes[pline[0]]()
 
-        if length > 2:
-            for i in range(2, length):
-                if pline[2].count("=") != 1:
+        if length > 1:
+            for i in range(1, length):
+                if pline[1].count("=") != 1:
                     continue
                 var = pline[i].split('=')
                 key_name = var[0]
