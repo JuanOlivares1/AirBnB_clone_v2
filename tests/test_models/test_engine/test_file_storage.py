@@ -13,7 +13,7 @@ class test_fileStorage(unittest.TestCase):
     def test_pep8_conformance(self):
         """Test that we conform to PEP8."""
         pep8style = pep8.StyleGuide(quiet=True)
-        result = pep8style.check_files(['console.py'])
+        result = pep8style.check_files(['models/engine/file_storage.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
@@ -29,7 +29,9 @@ class test_fileStorage(unittest.TestCase):
         """ Remove storage file at end of tests """
         try:
             os.remove('file.json')
-        except:
+        except NameError:
+            pass
+        except FileNotFoundError:
             pass
 
     def test_obj_list_empty(self):
