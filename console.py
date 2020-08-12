@@ -35,8 +35,7 @@ class HBNBCommand(cmd.Cmd):
     def preloop(self):
         """Prints if isatty is false"""
         if not sys.__stdin__.isatty():
-            # print('(hbnb)')
-            print('(hbnb) ', end='')
+            print('(hbnb)')
 
     def precmd(self, line):
         """Reformat command line for advanced command syntax.
@@ -137,7 +136,9 @@ class HBNBCommand(cmd.Cmd):
             for i in range(2, length):
                 if pline[2].count("=") != 1:
                     continue
-                key_name, value = pline[i].split('=')
+                var = pline[i].split('=')
+                key_name = var[0]
+                value = var[1]
                 if not key_name:
                     continue
 
