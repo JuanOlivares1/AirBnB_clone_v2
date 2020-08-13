@@ -28,19 +28,25 @@ class DBStorage:
 
     def all(self, cls=None):
         """method for doing querying."""
-        from models import User, State, City, Amenity, Place, Review
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
         session = self.__session
+        classes = [City, State]
         objs = {}
+        query = []
 
         if cls is not None:
-            query = session.query(cls).all()
+            query.extend(session.query(cls).all())
         else:
-            query = session.query(User, State,
-                                  City, Amenity, Place, Review).all()
+            for element in classes:
+                query.extend(session.query(element).all())
         for obj in query:
             key = type(obj).__name__ + '.' + obj.id
             objs[key] = obj
-
         return objs
 
     def new(self, obj):
@@ -61,6 +67,12 @@ class DBStorage:
 
     def reload(self):
         """create tables in database and session."""
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
         engine = self.__engine
         Base.metadata.create_all(engine)
         session_factory = sessionmaker(bind=engine, expire_on_commit=False)
