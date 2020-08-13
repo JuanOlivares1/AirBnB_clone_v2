@@ -14,7 +14,7 @@ class DBStorage:
     def __init__(self):
         """init method for DBStorage class."""
 
-        drop = environ['HBNB_ENV']
+        # drop = environ['HBNB_ENV']
         host = environ['HBNB_MYSQL_HOST']
         user = environ['HBNB_MYSQL_USER']
         pwd = environ['HBNB_MYSQL_PWD']
@@ -23,8 +23,8 @@ class DBStorage:
         self.__engine = create_engine(
             'mysql+mysqldb://{}:{}@{}:3306/{}'.format(
                 user, pwd, host, db), pool_pre_ping=True)
-        if drop == 'test':
-            Base.metadata.drop_all(bind=engine)
+        # if drop == 'test':
+        # Base.metadata.drop_all(bind=engine)
 
     def all(self, cls=None):
         """method for doing querying."""
