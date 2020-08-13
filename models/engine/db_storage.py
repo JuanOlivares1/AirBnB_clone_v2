@@ -35,7 +35,7 @@ class DBStorage:
         from models.place import Place
         from models.review import Review
         session = self.__session
-        classes = [City, State, User, Place]
+        classes = [City, State, User, Place, Review]
         objs = {}
         query = []
 
