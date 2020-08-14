@@ -25,7 +25,7 @@ class DBStorage:
             'mysql+mysqldb://{}:{}@{}:3306/{}'.format(
                 user, pwd, host, db), pool_pre_ping=True)
         if drop == 'test':
-            Base.metadata.drop_all(bind=engine)
+            Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
         """method for doing querying."""
