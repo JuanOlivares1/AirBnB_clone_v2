@@ -4,6 +4,7 @@ from sqlalchemy import (create_engine)
 from os import environ
 from models.base_model import Base
 from sqlalchemy.orm import sessionmaker, scoped_session
+from models.base_model import BaseModel, Base
 
 
 class DBStorage:
@@ -14,7 +15,7 @@ class DBStorage:
     def __init__(self):
         """init method for DBStorage class."""
 
-        # drop = environ['HBNB_ENV']
+        drop = environ['HBNB_ENV']
         host = environ['HBNB_MYSQL_HOST']
         user = environ['HBNB_MYSQL_USER']
         pwd = environ['HBNB_MYSQL_PWD']
@@ -23,19 +24,19 @@ class DBStorage:
         self.__engine = create_engine(
             'mysql+mysqldb://{}:{}@{}:3306/{}'.format(
                 user, pwd, host, db), pool_pre_ping=True)
-        # if drop == 'test':
-        # Base.metadata.drop_all(bind=engine)
+        if drop == 'test':
+            Base.metadata.drop_all(bind=engine)
 
     def all(self, cls=None):
         """method for doing querying."""
-        from models.user import User
         from models.state import State
         from models.city import City
-        from models.amenity import Amenity
+        from models.user import User
         from models.place import Place
         from models.review import Review
+        from models.amenity import Amenity
         session = self.__session
-        classes = [City, State, User, Place, Review]
+        classes = [City, State, User, Place, Review, Amenity]
         objs = {}
         query = []
 
@@ -67,12 +68,12 @@ class DBStorage:
 
     def reload(self):
         """create tables in database and session."""
-        from models.user import User
         from models.state import State
         from models.city import City
-        from models.amenity import Amenity
+        from models.user import User
         from models.place import Place
         from models.review import Review
+        from models.amenity import Amenity
         engine = self.__engine
         Base.metadata.create_all(engine)
         session_factory = sessionmaker(bind=engine, expire_on_commit=False)

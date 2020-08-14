@@ -1,8 +1,16 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Float, Table
 from sqlalchemy.orm import relationship
+
+place_amenity = Table('place_amenity', Base.metadata,
+                      Column('place_id', String(60),
+                             ForeignKey('places.id'),
+                             primary_key=True, nullable=False),
+                      Column('amenity_id', String(60),
+                             ForeignKey('amenities.id'),
+                             primary_key=True, nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -19,10 +27,25 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     amenity_ids = []
+
     reviews = relationship("Review", backref='place',
                            cascade="all, delete-orphan")
+
+    amenities = relationship("Amenity", secondary=place_amenity)
 
     @property
     def reviews(self):
         """Getter method for class attr reviews."""
         return type(self).reviews
+
+    @property
+    def amenities(self):
+        """Getter method for class attr amenities."""
+        return type(self).amenities
+
+    @amenities.setter
+    def amenities(self, obj):
+        """Setter method for class attr amenities."""
+        if obj is not None:
+            if type(obj).__name__ == "Amenity":
+                amenity_ids.append(obj.id)
