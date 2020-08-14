@@ -65,6 +65,5 @@ class FileStorage:
         key = type(obj).__name__ + '.' + obj.id
 
         if key in self.all().keys():
-            # del self.all()[key]
             self.all().pop(key)
             self.save()
