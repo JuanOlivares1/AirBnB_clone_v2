@@ -2,7 +2,6 @@
 """ Module for testing file storage PASO"""
 import unittest
 from models.base_model import BaseModel
-from models import DBStorage
 import os
 import pep8
 
@@ -15,11 +14,3 @@ class test_fileStorage(unittest.TestCase):
         pep8style = pep8.StyleGuide(quiet=True)
         result = pep8style.check_files(['./models/engine/db_storage.py'])
         self.assertEqual(result.total_errors, 0)
-
-    def test_docstring_Console(self):
-        """ tests that docstrings are present """
-        self.assertIsNotNone(DBStorage.all.__doc__)
-        self.assertIsNotNone(DBStorage.new.__doc__)
-        self.assertIsNotNone(DBStorage.save.__doc__)
-        self.assertIsNotNone(DBStorage.delete.__doc__)
-        self.assertIsNotNone(DBStorage.reload.__doc__)
