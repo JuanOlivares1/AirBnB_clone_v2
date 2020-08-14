@@ -1,15 +1,16 @@
 #!/usr/bin/python3
-""" """
+""" test """
 from models.base_model import BaseModel
 import unittest
 import datetime
 from uuid import UUID
+import pep8
 import json
 import os
 
 
 class test_basemodel(unittest.TestCase):
-    """ """
+    """test_basemodel"""
 
     def __init__(self, *args, **kwargs):
         """ """
@@ -74,12 +75,6 @@ class test_basemodel(unittest.TestCase):
         with self.assertRaises(TypeError):
             new = self.value(**n)
 
-    def test_kwargs_one(self):
-        """ """
-        n = {'Name': 'test'}
-        with self.assertRaises(KeyError):
-            new = self.value(**n)
-
     def test_id(self):
         """ """
         new = self.value()
@@ -97,3 +92,16 @@ class test_basemodel(unittest.TestCase):
         n = new.to_dict()
         new = BaseModel(**n)
         self.assertFalse(new.created_at == new.updated_at)
+
+    def test_docstring_BaseModel(self):
+        """ tests that docstrings are present """
+        self.assertIsNotNone(BaseModel.__init__.__doc__)
+        self.assertIsNotNone(BaseModel.to_dict.__doc__)
+        self.assertIsNotNone(BaseModel.save.__doc__)
+        self.assertIsNotNone(BaseModel.__str__.__doc__)
+
+    def test_basemodel_pep8(self):
+        """ tests pep8 compliance """
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(['./models/base_model.py'])
+        self.assertEqual(result.total_errors, 0)
