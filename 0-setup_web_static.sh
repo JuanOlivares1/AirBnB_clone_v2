@@ -43,6 +43,9 @@ echo "server {
     location /redirect_me {
         return 301 https://twitter.com/OlivaresP____;
     }
+    location /hbnb_static {
+        alias /data/web_static/current/;
+    }
     error_page 404 /404.html;
     location = /404.html{
         root /etc/nginx/html;
@@ -68,4 +71,4 @@ echo "server {
 #
 # You can move that to a different file under sites-available/ and symlink that
 # to sites-enabled/ to enable it." > /etc/nginx/sites-available/default
-sudo sed -i "31 a\ \tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}\n" /etc/nginx/sites-enabled/default
+service nginx restart
