@@ -1,27 +1,29 @@
 #!/usr/bin/python3
-"""Modle - generates a .tar file"""
+"""module"""
 from fabric.api import *
-from datetime import datetime
-from os.path import isfile, getsize
+import os
+import datetime
+from os.path import isfile
 
-env.hosts = ['35.243.167.75', '35.196.225.34']
+env.hosts = ['35.237.173.35', '34.75.253.25']
 
 
 def do_pack():
-    """creates the pack .tar"""
+    """make pack"""
     try:
         local("mkdir -p versions")
         fecha = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
         nombre = "versions/web_static_" + fecha + ".tgz"
         local("tar -cvzf " + nombre + " web_static")
-        print("web_static packed: {} -> {}Bytes".format(nombre,
-              getsize(nombre)))
+        print("web_static packed: {} -> {}Bytes".format(
+            nombre, os.path.getsize(nombre)))
         return nombre
     except:
         return None
 
+
 def do_deploy(archive_path):
-    """send data to remote server"""
+    """deploy pack"""
     if isfile(archive_path):
         pre_path = archive_path.split("/")[1]
         put(archive_path, "/tmp/")
