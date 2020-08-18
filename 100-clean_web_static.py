@@ -52,6 +52,7 @@ def deploy():
     else:
         return do_deploy(fl)
 
+
 def do_clean(number=0):
     """Cleans the old files"""
     num = int(number)
