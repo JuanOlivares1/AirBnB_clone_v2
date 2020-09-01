@@ -9,3 +9,6 @@ app = Flask(__name__)
 def hello_hbnb():
     """Defines response for route '\'"""
     return 'Hello HBNB!'
+
+if __name__ == '__main__':
+    app.run()
