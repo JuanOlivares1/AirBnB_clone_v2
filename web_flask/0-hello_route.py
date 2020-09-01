@@ -1,4 +1,4 @@
-#!/usr/bin/env pyrhon3
+#!/usr/bin/python3
 """getting started on flask"""
 
 from flask import Flask
