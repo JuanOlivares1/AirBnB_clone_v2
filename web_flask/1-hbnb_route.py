@@ -10,6 +10,7 @@ def hello_hbnb():
     """Defines response for route '\'"""
     return 'Hello HBNB!'
 
+
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
     """Defines response for route '\hbnb'"""
