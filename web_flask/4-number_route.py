@@ -32,7 +32,7 @@ def python_is_cool(text="is cool"):
 
 @app.route('/number/<int:n>', strict_slashes=False)
 def number(n):
-    """Defines response for route '/number/<n>'"""
+    """Defines response for route '/number/<n>' """
     return "{} is a number".format(n)
 
 if __name__ == '__main__':
