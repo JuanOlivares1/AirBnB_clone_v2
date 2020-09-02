@@ -15,7 +15,7 @@ class DBStorage:
     def __init__(self):
         """init method for DBStorage class."""
 
-        drop = 'test' # environ['HBNB_ENV']
+        drop = 'test'  # environ['HBNB_ENV']
         host = environ['HBNB_MYSQL_HOST']
         user = environ['HBNB_MYSQL_USER']
         pwd = environ['HBNB_MYSQL_PWD']
