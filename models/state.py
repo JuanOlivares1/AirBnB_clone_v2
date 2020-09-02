@@ -15,4 +15,11 @@ class State(BaseModel, Base):
     @property
     def cities(self):
         """Getter method for class attr cities."""
-        return type(self).cities
+        from models import storage
+        from models.city import City
+        cities = storage.all(City)
+        cities_list = []
+        for i in cities.values():
+            if self.id == i.state_id:
+                cities_list.append(i)
+        return cities_list

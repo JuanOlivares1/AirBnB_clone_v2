@@ -15,7 +15,7 @@ class DBStorage:
     def __init__(self):
         """init method for DBStorage class."""
 
-        drop = environ['HBNB_ENV']
+        drop = 'test' # environ['HBNB_ENV']
         host = environ['HBNB_MYSQL_HOST']
         user = environ['HBNB_MYSQL_USER']
         pwd = environ['HBNB_MYSQL_PWD']
@@ -79,3 +79,7 @@ class DBStorage:
         session_factory = sessionmaker(bind=engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
+
+    def close(self):
+        """close"""
+        self.__session.close()
