@@ -8,10 +8,10 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
-@app.route('/states_list', strict_slashes=False)
-def states_list():
-    """Defines response for route '/states_list'"""
-    return render_template('7-states_list.html', states=storage.all(State))
+@app.route('/cities_by_states', strict_slashes=False)
+def cities_by_states():
+    """Defines response for route '/cities_by_states'"""
+    return render_template('8-cities_by_states.html', states=storage.all(State))
 
 
 @app.teardown_appcontext
